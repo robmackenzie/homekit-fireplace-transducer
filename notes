@@ -1,0 +1,27 @@
+Fireplace controlESP32
+
+Goals
+
+* Control fireplace from homekit
+* cheap
+
+
+
+ESPHome doing similar things. ESPHome will not work because it does not do homekit stuff without homeassistant.
+https://esphome.io/components/remote_transmitter.html#remote-transmitter-actions
+
+This is a project with very similar goals, again using ESPhome.
+https://community.home-assistant.io/t/control-a-heat-glo-fireplace-via-rf-remote/795335/3
+
+Trying to find a good place to order exactly those modules. 
+
+
+
+Homekit
+
+https://github.com/HomeSpan/HomeSpan
+https://github.com/HomeSpan/HomeSpan/blob/master/docs/RMT.md
+2nd link talks about RF control with HomeSpan, which sounds like what we want.
+
+Random github page that might help generate timings of existing code wihtout more trouble:
+https://github.com/thexperiments/esp8266_RFControl
