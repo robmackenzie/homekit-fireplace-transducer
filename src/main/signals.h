@@ -1,8 +1,33 @@
-#include "HomeSpan.h"             // include the HomeSpan library
-
-const int tick_len=100
 int onCommandLength=25;
 uint32_t onCommand[] = {
+RF_PULSE(4,12), // 9 pulses to start sync
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+
+RF_PULSE(12,4),
+RF_PULSE(4,12),
+RF_PULSE(12,4),
+RF_PULSE(4,12),
+RF_PULSE(12,4),
+RF_PULSE(4,12),
+RF_PULSE(12,4),
+RF_PULSE(12,4),
+RF_PULSE(12,4),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(4,12),
+RF_PULSE(12,4),
+RF_PULSE(4,12),
+RF_PULSE(12,4),
+RF_PULSE(4,48)};
+int offCommandLength=25;
+uint32_t offCommand[] = {
 RF_PULSE(4,12), // 9 pulses to start sync
 RF_PULSE(4,12),
 RF_PULSE(4,12),
@@ -29,52 +54,4 @@ RF_PULSE(4,12),
 RF_PULSE(12,4),
 RF_PULSE(4,12),
 RF_PULSE(12,4),
-RF_PULSE(4,12)};
-
-
-int offCommandLength=25;
-uint32_t offCommand[] = {
-RF_PULSE(4,12), // 9 pulses to start sync
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-
-RF_PULSE(12,4),
-RF_PULSE(4,12),
-RF_PULSE(12,4),
-RF_PULSE(4,12),
-RF_PULSE(12,4),
-RF_PULSE(4,12),
-RF_PULSE(12,4),
-RF_PULSE(12,4),
-RF_PULSE(12,4),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(4,12),
-RF_PULSE(12,4),
-RF_PULSE(4,12),
-RF_PULSE(12,4),
-RF_PULSE(4,12)};
-
-
-void setup() {    
-    Serial.begin(115200);           // start the Serial interface
-    Serial.flush();
-    delay(100);                    // wait for interface to flush
-    Serial.print("\n\nHomeSpan RF Transmitter Example\n\n");
-    RFControl rf(11,true);  // create an instance of RFControl, use default 1 ms clock
-    rf.clear();                     // clear the pulse train memory buffer
-    Serial.print("Sending On command");
-    rf.start(onCommand,onCommandLength,3,tick_len);
-    delay(5000); // Sleep 5 seconds
-    rf.start(offCommand,offCommandLength,3,tick_len);
-    Serial.print("Done!\n");
-}
-void loop(){
-
-}
+RF_PULSE(4,48)};
