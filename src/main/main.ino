@@ -4,7 +4,6 @@
 const int repeat_count=5;
 const int tick_len=100;
 
-
 struct DEV_FIREPLACE : Service::Switch {
   //Characteristic::On power; // This is in some versions, probably old?
   SpanCharacteristic *power;                        // here we create a generic pointer to a SpanCharacteristic named "power" that we will use below
@@ -25,7 +24,6 @@ struct DEV_FIREPLACE : Service::Switch {
     return(true);
   }
 };
-
 
 void setup() {
   Serial.begin(115200);
