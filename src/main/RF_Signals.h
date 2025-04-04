@@ -25,7 +25,7 @@ RF_PULSE(4,12),
 RF_PULSE(12,4),
 RF_PULSE(4,12),
 RF_PULSE(12,4),
-RF_PULSE(4,48)};
+RF_PULSE(4,120)};
 int offCommandLength=25;
 uint32_t offCommand[] = {
 RF_PULSE(4,12), // 9 pulses to start sync
@@ -54,4 +54,4 @@ RF_PULSE(4,12),
 RF_PULSE(12,4),
 RF_PULSE(4,12),
 RF_PULSE(12,4),
-RF_PULSE(4,48)};
+RF_PULSE(4,120)};
