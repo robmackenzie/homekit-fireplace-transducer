@@ -1,20 +1,22 @@
 #include "HomeSpan.h"
 #include "RF_Signals.h"
-#define RF_TX_PIN 21
+#define RF_TX_PIN 3
+#define STATUS_LED_PIN 8
+#define BUTTON_PIN 9
 const int repeat_count=5;
 const int tick_len=100;
 
 struct DEV_FIREPLACE : Service::Switch {
-  //Characteristic::On power; // This is in some versions, probably old?
-  SpanCharacteristic *power;                        // here we create a generic pointer to a SpanCharacteristic named "power" that we will use below
-  DEV_FIREPLACE() : Service::Switch(){
-    RFControl rf(RF_TX_PIN,true);  // create an instance of RFControl, use default 1 ms clock (the bool true)
-    rf.clear();                     // clear the pulse train memory buffer
+  SpanCharacteristic *power; // here we create a generic pointer to a SpanCharacteristic named "power" that we will use below
+  RFControl rf;  // Declare rf
+
+  DEV_FIREPLACE() : Service::Switch(), rf(RF_TX_PIN, true) {
+    rf.clear();  // clear the pulse train memory buffer
     power=new Characteristic::On();
   }
   boolean update() override {
-    if power->getNewVal<bool>() !=power->getVal<bool> {
-      if power->getNewVal<bool>() {
+    if (power->getNewVal<bool>() !=power->getVal<bool>()) {
+      if (power->getNewVal<bool>()) {
         rf.start(onCommand,onCommandLength,repeat_count,tick_len);
       }
       else {
@@ -27,9 +29,11 @@ struct DEV_FIREPLACE : Service::Switch {
 
 void setup() {
   Serial.begin(115200);
+  homeSpan.setStatusPin(STATUS_LED_PIN);
+  homeSpan.setControlPin(BUTTON_PIN);
   homeSpan.setLogLevel(2);
   homeSpan.begin(Category::Lighting,"RF Fireplace Control");
-  new SpanAccessory();      
+  new SpanAccessory();
     new Service::AccessoryInformation();
       new Characteristic::Identify();
       //new Characteristic::Name("Fireplace");              
